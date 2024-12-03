@@ -2,6 +2,8 @@
 
 Package **jsonld** provides JSON-LD encoders and decoders, for the Go programming language.
 
+And in particular, handles the way the Fediverse, ActivityPub, and ActivityStreams uses JSON-LD.
+
 ## Documention
 
 Online documentation, which includes examples, can be found at: http://godoc.org/github.com/reiver/go-jsonld
