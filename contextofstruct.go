@@ -49,10 +49,7 @@ func contextOfStruct(value any) (Context, error) {
 				}
 
 			default:
-				name, found := structField.Tag.Lookup(structTagName)
-				if !found {
-					name = structField.Name
-				}
+				name := structFieldName(structField)
 
 				context.Names = append(context.Names, name)
 			}
