@@ -29,19 +29,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "Apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "Banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "Cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"Apple",
+					"Banana",
+					"Cherry",
 				},
 			},
 		},
@@ -59,19 +50,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "Banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "Cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"Banana",
+					"Cherry",
 				},
 			},
 		},
@@ -86,19 +68,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "Apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "Cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"Apple",
+					"banana",
+					"Cherry",
 				},
 			},
 		},
@@ -113,19 +86,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "Apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "Banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"Apple",
+					"Banana",
+					"cherry",
 				},
 			},
 		},
@@ -143,19 +107,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "Apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"Apple",
+					"banana",
+					"cherry",
 				},
 			},
 		},
@@ -170,19 +125,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "Banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"Banana",
+					"cherry",
 				},
 			},
 		},
@@ -197,19 +143,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "Cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"banana",
+					"Cherry",
 				},
 			},
 		},
@@ -227,19 +164,10 @@ func TestContextOfStruct(t *testing.T) {
 				Cherry: "پ",
 			},
 			Expected: Context{
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"banana",
+					"cherry",
 				},
 			},
 		},
@@ -259,19 +187,10 @@ func TestContextOfStruct(t *testing.T) {
 			},
 			Expected: Context{
 				NameSpace: "http://example.com/ns/",
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"banana",
+					"cherry",
 				},
 			},
 		},
@@ -293,19 +212,10 @@ func TestContextOfStruct(t *testing.T) {
 			Expected: Context{
 				NameSpace: "http://example.com/ns/",
 				Prefix: "ex",
-				NameValues: []NameValue{
-					NameValue{
-						Name: "apple",
-						Value: "ONE",
-					},
-					NameValue{
-						Name: "banana",
-						Value: "2",
-					},
-					NameValue{
-						Name: "cherry",
-						Value: "پ",
-					},
+				Names: []string{
+					"apple",
+					"banana",
+					"cherry",
 				},
 			},
 		},

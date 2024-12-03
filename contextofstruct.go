@@ -35,7 +35,7 @@ func contextOfStruct(value any) (Context, error) {
 			var structField reflect.StructField = reflectedType.Field(index)
 			var reflectedFieldValue reflect.Value = reflectedValue.Field(index)
 
-			switch casted := reflectedFieldValue.Interface().(type) {
+			switch reflectedFieldValue.Interface().(type) {
 			case NameSpace:
 				value, found := structField.Tag.Lookup(structTagName)
 				if found {
@@ -54,14 +54,7 @@ func contextOfStruct(value any) (Context, error) {
 					name = structField.Name
 				}
 
-				var value any = casted
-
-				var namevalue = NameValue{
-					Name: name,
-					Value: value,
-				}
-
-				context.NameValues = append(context.NameValues, namevalue)
+				context.Names = append(context.Names, name)
 			}
 		}
 	}
