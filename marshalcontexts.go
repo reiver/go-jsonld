@@ -26,7 +26,7 @@ func MarshalContexts(contexts ...Context) ([]byte, error) {
 
 	var curlyed bool = false
 	{
-		forExplicitNameSpaces(func(prefix string, namespace string){
+		forContextExplicitNameSpaces(func(prefix string, namespace string){
 			if !curlyed {
 				if squared {
 					bytes = append(bytes, ',')
