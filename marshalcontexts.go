@@ -11,7 +11,7 @@ func MarshalContexts(contexts ...Context) ([]byte, error) {
 	var squared bool = false
 	{
 
-		forImplicitNameSpaces(func(namespace string){
+		forContextImplicitNameSpaces(func(namespace string){
 			if !squared {
 				bytes = append(bytes, '[')
 				squared = true

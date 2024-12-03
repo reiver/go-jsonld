@@ -1,6 +1,6 @@
 package jsonld
 
-func forImplicitNameSpaces(fn func(string), contexts ...Context) {
+func forContextImplicitNameSpaces(fn func(string), contexts ...Context) {
 	if nil == fn {
 		return
 	}
