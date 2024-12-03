@@ -8,5 +8,5 @@ package jsonld
 type Context struct {
 	NameSpace string
 	Prefix string
-	NameValues []NameValue
+	Names []string
 }
