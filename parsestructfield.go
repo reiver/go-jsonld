@@ -25,7 +25,7 @@ func parseStructField(structField reflect.StructField) (name string, omitEmpty b
 	}
 
 	for _, token := range a[1:] {
-		switch token {
+		switch strings.TrimSpace(token) {
 		case "omitempty":
 			omitEmpty = true
 		}
