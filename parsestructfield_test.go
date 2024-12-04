@@ -103,6 +103,68 @@ func TestParseStructField(t *testing.T) {
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
 		},
+
+
+
+		{
+			Value: struct{
+				First string
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `jsonld:"first "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `jsonld:",omitempty"`
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: true,
+		},
+		{
+			Value: struct{
+				First string `jsonld:"first ,omitempty"`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: true,
+		},
+
+
+
+		{
+			Value: struct{
+				First string
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `jsonld:"  first "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `jsonld:",omitempty"`
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: true,
+		},
+		{
+			Value: struct{
+				First string `jsonld:"  first ,omitempty"`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: true,
+		},
 	}
 
 	for testNumber, test := range tests {
