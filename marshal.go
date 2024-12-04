@@ -53,7 +53,26 @@ func Marshal(values ...any) ([]byte, error) {
 
 	{
 		for _, value := range values {
-			forStructFields(func(name string, value any){
+			err := forStructFields(func(name string, value any, omitEmpty bool)error{
+				if omitEmpty && isSimpleEmpty(value) {
+					return nil
+				}
+
+				var val []byte
+				{
+					var err error
+					val, err = json.Marshal(value)
+					if omitEmpty {
+						switch err.(type) {
+						case EmptyError:
+							return nil
+						}
+					}
+					if nil != err {
+						return err
+					}
+				}
+
 				if comma {
 					bytes = append(bytes, ',')
 				}
@@ -61,14 +80,13 @@ func Marshal(values ...any) ([]byte, error) {
 
 				bytes = append(bytes, json.MarshalString(name)...)
 				bytes = append(bytes, ':')
-				{
-					result, err := json.Marshal(value)
-					if nil != err {
-						
-					}
-					bytes = append(bytes, result...)
-				}
+				bytes = append(bytes, val...)
+
+				return nil
 			}, value)
+			if nil != err {
+				return nil, err
+			}
 		}
 	}
 

@@ -4,9 +4,9 @@ import (
 	"reflect"
 )
 
-func forStructFields(fn func(string,any), strct any) {
+func forStructFields(fn func(string,any,bool)error, strct any) error {
 	if nil == fn {
-		return
+		return errNilFunc
 	}
 
 	var reflectedStructValue reflect.Value = reflect.ValueOf(strct)
@@ -30,8 +30,16 @@ func forStructFields(fn func(string,any), strct any) {
 		}
 
 		var structField reflect.StructField = reflectedStructType.Field(index)
-		var name string = structFieldName(structField)
 
-		fn(name, value)
+		var name string
+		var omitEmpty bool
+		name, omitEmpty = parseStructField(structField)
+
+		err := fn(name, value, omitEmpty)
+		if nil != err {
+			return err
+		}
 	}
+
+	return nil
 }

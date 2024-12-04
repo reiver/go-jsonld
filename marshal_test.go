@@ -376,6 +376,146 @@ func TestMarshal(t *testing.T) {
 					`"colour":"yellow"`+
 				`}`),
 		},
+
+
+
+		{
+			Values: []any{
+				struct{
+					ID      string `jsonld:"id"`
+					Name    string `jsonld:"name"`
+					Summary string `jsonld:"summary"`
+					Type    string `jsonld:"type"`
+				}{
+					ID: "urn:uuid:88c6a753-d6d5-45eb-bc18-9b1089e7b1f8",
+					Name: "Joe Blow",
+					Summary: "Hello world!",
+					Type: "Person",
+				},
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"http://joinmastodon.org/ns#"`
+					Prefix    jsonld.Prefix    `jsonld:"toot"`
+
+					AttributionDomains string `jsonld:"attributionDomains,omitempty"`
+					Emoji              string `jsonld:",omitempty"`
+					Discoverable       bool   `jsonld:"discoverable"`
+					Featured           bool   `jsonld:"featured"`
+					FeaturedTags       string `jsonld:"featuredTags,omitempty"`
+					FocalPoint       []any    `jsonld:"focalPoint,omitempty"`
+					Indexable          bool   `jsonld:"indexable"`
+					Memorial           bool   `jsonld:"memorial"`
+					Suspended          bool   `jsonld:"suspended"`
+				}{
+					Discoverable: true,
+					Featured:     true,
+					FeaturedTags: "#once #twice #thrice #fource",
+					FocalPoint: []any{12,100},
+					Indexable:    true,
+					Memorial:     false,
+					Suspended:    false,
+				},
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"https://www.w3.org/ns/activitystreams"`
+					Prefix    jsonld.Prefix    `jsonld:"as"`
+
+					AlsoKnownAs []string `jsonld:"alsoKnownAs,omitempty"`
+					Hashtag     []string `jsonld:"Hashtag,omitempty"`
+					MovedTo       string `jsonld:"movedTo,omitempty"`
+				}{
+					Hashtag: []string{
+						"#fediverse",
+					},
+				},
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"https://w3id.org/security/v1"`
+
+					Signature string `jsonld:"signature,omitempty"`
+				}{
+				},
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"https://banana.example/ns#"`
+
+					Color string `jsonld:"colour"`
+				}{
+					Color: "yellow",
+				},
+			},
+			Expected: []byte(
+				`{`+
+					`"@context":[`+
+						`"https://w3id.org/security/v1"`+
+						`,`+
+						`"https://banana.example/ns#"`+
+						`,`+
+						`{`+
+							`"toot":"http://joinmastodon.org/ns#"`+
+							`,`+
+							`"as":"https://www.w3.org/ns/activitystreams"`+
+
+							`,`+
+
+							`"attributionDomains":"toot:attributionDomains"`+
+							`,`+
+							`"Emoji":"toot:Emoji"`+
+							`,`+
+							`"discoverable":"toot:discoverable"`+
+							`,`+
+							`"featured":"toot:featured"`+
+							`,`+
+							`"featuredTags":"toot:featuredTags"`+
+							`,`+
+							`"focalPoint":"toot:focalPoint"`+
+							`,`+
+							`"indexable":"toot:indexable"`+
+							`,`+
+							`"memorial":"toot:memorial"`+
+							`,`+
+							`"suspended":"toot:suspended"`+
+
+							`,`+
+
+							`"alsoKnownAs":"as:alsoKnownAs"`+
+							`,`+
+							`"Hashtag":"as:Hashtag"`+
+							`,`+
+							`"movedTo":"as:movedTo"`+
+						`}`+
+					`]`+
+					`,`+
+
+					`"id":"urn:uuid:88c6a753-d6d5-45eb-bc18-9b1089e7b1f8"`+
+					`,`+
+					`"name":"Joe Blow"`+
+					`,`+
+					`"summary":"Hello world!"`+
+					`,`+
+					`"type":"Person"`+
+
+					`,`+
+
+					`"discoverable":true`+
+					`,`+
+					`"featured":true`+
+					`,`+
+					`"featuredTags":"#once #twice #thrice #fource"`+
+					`,`+
+					`"focalPoint":[12,100]`+
+					`,`+
+					`"indexable":true`+
+					`,`+
+					`"memorial":false`+
+					`,`+
+					`"suspended":false`+
+
+					`,`+
+
+					`"Hashtag":["#fediverse"]`+
+
+					`,`+
+
+					`"colour":"yellow"`+
+				`}`),
+		},
 	}
 
 	for testNumber, test := range tests {

@@ -5,7 +5,8 @@ import (
 )
 
 const (
-	errNilValue         = erorr.Error("jsonld: nil value")
+	errNilFunc          = erorr.Error("jsonld: nil func")
 	errNilReflectedType = erorr.Error("jsonld: nil reflected-value")
+	errNilValue         = erorr.Error("jsonld: nil value")
 	errNotStruct        = erorr.Error("jsonld: not struct")
 )
