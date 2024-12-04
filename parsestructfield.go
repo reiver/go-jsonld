@@ -31,6 +31,7 @@ func parseStructField(structField reflect.StructField) (name string, omitEmpty b
 		}
 	}
 
+	name = strings.TrimSpace(name)
 	return
 }
 
