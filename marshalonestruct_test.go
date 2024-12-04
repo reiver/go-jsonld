@@ -134,6 +134,23 @@ func TestMarshalOneStruct(t *testing.T) {
 			},
 			Expected: []byte(`{"banana":2}`),
 		},
+
+
+
+		{
+			Value: struct{
+				Apple  string `jsonld:"apple,omitempty"`
+				Banana int    `jsonld:"banana"`
+				Cherry string `jsonld:"cherry,omitempty"`
+				date   int 
+			}{
+				Apple:"",
+				Banana:2,
+				Cherry:"",
+				date: 4,
+			},
+			Expected: []byte(`{"banana":2}`),
+		},
 	}
 
 	for testNumber, test := range tests {

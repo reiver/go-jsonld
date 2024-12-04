@@ -34,6 +34,10 @@ func marshalOneStruct(value any) ([]byte, error) {
 			var reflectedStructFieldValue reflect.Value       = reflectedStructValue.Field(index)
 			var reflectedStructFieldType  reflect.StructField = reflectedStructType.Field(index)
 
+			if !reflectedStructFieldType.IsExported() {
+				continue
+			}
+
 			name, omitEmpty := parseStructField(reflectedStructFieldType)
 
 			if omitEmpty && isSimpleEmpty(reflectedStructFieldValue.Interface()) {

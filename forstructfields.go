@@ -20,8 +20,14 @@ func forStructFields(fn func(string,any,bool)error, strct any) error {
 	var limit int = reflectedStructValue.NumField()
 
 	for index:=0; index < limit; index++ {
-		var reflectedFieldValue reflect.Value = reflectedStructValue.Field(index)
-		var value any = reflectedFieldValue.Interface()
+		var reflectedStructFieldValue reflect.Value = reflectedStructValue.Field(index)
+		var reflectedStructFieldType reflect.StructField = reflectedStructType.Field(index)
+
+		if !reflectedStructFieldType.IsExported() {
+			continue
+		}
+
+		var value any = reflectedStructFieldValue.Interface()
 
 		switch value.(type) {
 		case NameSpace:
@@ -31,6 +37,10 @@ func forStructFields(fn func(string,any,bool)error, strct any) error {
 		}
 
 		var structField reflect.StructField = reflectedStructType.Field(index)
+
+		if !structField.IsExported() {
+			continue
+		}
 
 		var name string
 		var omitEmpty bool

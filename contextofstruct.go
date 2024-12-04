@@ -35,6 +35,10 @@ func contextOfStruct(value any) (Context, error) {
 			var structField reflect.StructField = reflectedType.Field(index)
 			var reflectedFieldValue reflect.Value = reflectedValue.Field(index)
 
+			if !structField.IsExported() {
+				continue
+			}
+
 			switch reflectedFieldValue.Interface().(type) {
 			case NameSpace:
 				value, found := structField.Tag.Lookup(structTagName)
