@@ -1,6 +1,7 @@
 package jsonld
 
 import (
+	"fmt"
 	"reflect"
 )
 
@@ -13,7 +14,7 @@ func forStructFields(fn func(string,any,bool)error, strct any) error {
 	var reflectedStructType  reflect.Type  = reflect.TypeOf(strct)
 
 	if reflect.Struct != reflectedStructValue.Kind() {
-		panic("jsonld: not struct")
+		panic(fmt.Sprintf("jsonld: not struct — is actually a %T", strct))
 	}
 
 	var limit int = reflectedStructValue.NumField()

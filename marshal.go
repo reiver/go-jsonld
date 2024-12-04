@@ -2,7 +2,9 @@ package jsonld
 
 import (
 	gobytes "bytes"
+	"reflect"
 
+	"github.com/reiver/go-erorr"
 	"github.com/reiver/go-json"
 )
 
@@ -14,10 +16,13 @@ var emptyJSON []byte = []byte(`{}`)
 //
 //	bytes, err := jsonld.Marshal(activitypub, activitystreams, security, toot, schema)
 func Marshal(values ...any) ([]byte, error) {
-	var buffer [256]byte
-	var bytes []byte = buffer[0:0]
-
-	bytes = append(bytes, '{')
+	for index, value := range values {
+		var reflectedType reflect.Type = reflect.TypeOf(value)
+		var kind reflect.Kind = reflectedType.Kind()
+		if reflect.Struct != kind  {
+			return nil, erorr.Errorf("jsonld: cannot marshal value №%d of type %T — type must be struct", 1+index, value)
+		}
+	}
 
 	var contexts []Context
 	{
@@ -30,6 +35,22 @@ func Marshal(values ...any) ([]byte, error) {
 			contexts = append(contexts, context)
 		}
 	}
+
+	return marshal(contexts, values...)
+}
+
+func marshal(contexts []Context, values ...any) ([]byte, error) {
+	if 1 == len(values) {
+		var value any = values[0]
+		if isSimpleType(value) {
+			return marshalSimpleType(value)
+		}
+	}
+
+	var buffer [256]byte
+	var bytes []byte = buffer[0:0]
+
+	bytes = append(bytes, '{')
 
 	var hasContext bool = false
 	if 0 < len(contexts) {
@@ -61,7 +82,7 @@ func Marshal(values ...any) ([]byte, error) {
 				var val []byte
 				{
 					var err error
-					val, err = json.Marshal(value)
+					val, err = marshalOne(value)
 					if omitEmpty {
 						switch err.(type) {
 						case EmptyError:
