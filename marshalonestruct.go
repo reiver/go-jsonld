@@ -77,7 +77,7 @@ func nakedMarshalOneStruct(value any) ([]byte, error) {
 			{
 				result, err := marshalOne(reflectedStructFieldValue.Interface())
 				if nil != err {
-					return nil, err
+					return nil, erorr.Errorf("jsonld: problem marshaling field №%d (%q) of struct %T: %w", 1+index, reflectedStructFieldType.Name, value, err)
 				}
 
 				bytes = append(bytes, result...)
