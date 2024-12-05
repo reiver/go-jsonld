@@ -2,6 +2,7 @@ package jsonld
 
 import (
 	"reflect"
+	"sort"
 
 	"github.com/reiver/go-erorr"
 )
@@ -20,10 +21,19 @@ func marshalOneMap(value any) ([]byte, error) {
 	var buffer [256]byte
 	var bytes []byte = buffer[0:0]
 
-	bytes = append(bytes, '{')
-
 	{
 		var reflectedKeys []reflect.Value = reflectedValue.MapKeys()
+
+		{
+			var fn = func(index1, index2 int) bool {
+				value1 := reflectedKeys[index1]
+				value2 := reflectedKeys[index2]
+
+				return value1.String() < value2.String()
+			}
+
+			sort.Slice(reflectedKeys, fn)
+		}
 
 		for index, reflectedKey := range reflectedKeys {
 			var reflectedDatum reflect.Value = reflectedValue.MapIndex(reflectedKey)
