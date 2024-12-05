@@ -280,13 +280,18 @@ func TestMarshalOne(t *testing.T) {
 				Banana int    `jsonld:"banana"`
 				Cherry string `jsonld:"cherry,omitempty"`
 				date   int
+
+				List []string `jsonld:"list,omitempty"`
+				Thing  string `jsonld:"thing"`
 			}{
 				Apple:"",
 				Banana:2,
 				Cherry:"",
 				date: 4,
+				List: []string{"#one","#two","#three","#four"},
+				Thing: "wow",
 			},
-			Expected: []byte(`{"banana":2}`),
+			Expected: []byte(`{"banana":2,"list":["#one","#two","#three","#four"],"thing":"wow"}`),
 		},
 	}
 
