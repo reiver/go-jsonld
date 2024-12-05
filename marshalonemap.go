@@ -8,6 +8,21 @@ import (
 )
 
 func marshalOneMap(value any) ([]byte, error) {
+	result, err := nakedMarshalOneMap(value)
+	if nil != err {
+		return nil, err
+	}
+
+	var bytes [] byte
+
+	bytes = append(bytes, '{')
+	bytes = append(bytes, result...)
+	bytes = append(bytes, '}')
+
+	return bytes, nil
+}
+
+func nakedMarshalOneMap(value any) ([]byte, error) {
 	var reflectedValue reflect.Value = reflect.ValueOf(value)
 
 	{
@@ -68,8 +83,6 @@ func marshalOneMap(value any) ([]byte, error) {
 			}
 		}
 	}
-
-	bytes = append(bytes, '}')
 
 	return bytes, nil
 }

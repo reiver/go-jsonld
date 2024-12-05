@@ -14,12 +14,14 @@ func TestMarshal(t *testing.T) {
 		Values []any
 		Expected []byte
 	}{
+		// 0
 		{
 			Expected: []byte(`{}`),
 		},
 
 
 
+		// 1
 		{
 			Values: []any{
 				struct{
@@ -44,6 +46,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 2
 		{
 			Values: []any{
 				struct{
@@ -68,6 +71,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 3
 		{
 			Values: []any{
 				struct{
@@ -92,6 +96,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 4
 		{
 			Values: []any{
 				struct{
@@ -121,6 +126,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 5
 		{
 			Values: []any{
 				struct{
@@ -157,6 +163,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 6
 		{
 			Values: []any{
 				struct{
@@ -228,6 +235,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 7
 		{
 			Values: []any{
 				struct{
@@ -371,6 +379,7 @@ func TestMarshal(t *testing.T) {
 					`,`+
 
 					`"signature":""`+
+
 					`,`+
 
 					`"colour":"yellow"`+
@@ -379,6 +388,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 8
 		{
 			Values: []any{
 				struct{
@@ -419,10 +429,10 @@ func TestMarshal(t *testing.T) {
 					Prefix    jsonld.Prefix    `jsonld:"as"`
 
 					AlsoKnownAs []string `jsonld:"alsoKnownAs,omitempty"`
-					Hashtag     []string `jsonld:"Hashtag,omitempty"`
+					HashTag     []string `jsonld:"Hashtag,omitempty"`
 					MovedTo       string `jsonld:"movedTo,omitempty"`
 				}{
-					Hashtag: []string{
+					HashTag: []string{
 						"#fediverse",
 					},
 				},
@@ -524,6 +534,7 @@ func TestMarshal(t *testing.T) {
 
 
 
+		// 9
 		{
 			Values: []any{
 				struct{

@@ -19,8 +19,8 @@ func Marshal(values ...any) ([]byte, error) {
 	for index, value := range values {
 		var reflectedType reflect.Type = reflect.TypeOf(value)
 		var kind reflect.Kind = reflectedType.Kind()
-		if reflect.Struct != kind  {
-			return nil, erorr.Errorf("jsonld: cannot marshal value №%d of type %T — type must be struct", 1+index, value)
+		if reflect.Struct != kind && reflect.Map != kind {
+			return nil, erorr.Errorf("jsonld: cannot marshal value №%d of type %T — type must be struct or map", 1+index, value)
 		}
 	}
 
@@ -40,15 +40,7 @@ func Marshal(values ...any) ([]byte, error) {
 }
 
 func marshal(contexts []Context, values ...any) ([]byte, error) {
-	if 1 == len(values) {
-		var value any = values[0]
-		if isSimpleType(value) {
-			return marshalSimpleType(value)
-		}
-	}
-
-	var buffer [256]byte
-	var bytes []byte = buffer[0:0]
+	var bytes []byte
 
 	bytes = append(bytes, '{')
 
@@ -73,41 +65,23 @@ func marshal(contexts []Context, values ...any) ([]byte, error) {
 	}
 
 	{
-		for _, value := range values {
-			err := forStructFields(func(name string, value any, omitEmpty bool)error{
-				if omitEmpty && isSimpleEmpty(value) {
-					return nil
-				}
+		for index, value := range values {
 
-				var val []byte
-				{
-					var err error
-					val, err = marshalOne(value)
-					if omitEmpty {
-						switch err.(type) {
-						case EmptyError:
-							return nil
-						}
-					}
-					if nil != err {
-						return err
-					}
-				}
-
-				if comma {
-					bytes = append(bytes, ',')
-				}
-				comma = true
-
-				bytes = append(bytes, json.MarshalString(name)...)
-				bytes = append(bytes, ':')
-				bytes = append(bytes, val...)
-
-				return nil
-			}, value)
+			result, err := nakedMarshalOne(value)
 			if nil != err {
-				return nil, err
+				return nil, erorr.Errorf("jsonld: problem marshaling value №%d of type %T: %w", 1+index, value, err)
 			}
+			if len(result) <= 0 {
+				continue
+			}
+
+			if comma {
+				bytes = append(bytes, ',')
+			}
+			comma = true
+
+			bytes = append(bytes, result...)
+
 		}
 	}
 
