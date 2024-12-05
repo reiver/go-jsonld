@@ -6,6 +6,16 @@ import (
 	"bytes"
 )
 
+type TestMarshalSimpleType_type1 struct {}
+func (receiver TestMarshalSimpleType_type1) MarshalJSON() ([]byte, error) {
+	return []byte(`"it worked!"`), nil
+}
+
+type TestMarshalSimpleType_type2 struct {}
+func (receiver TestMarshalSimpleType_type2) MarshalJSON() ([]byte, error) {
+	return []byte(`["ONCE","TWICE","THRICE","FOURCE"]`), nil
+}
+
 func TestMarshalSimpleType(t *testing.T) {
 	tests := []struct{
 		Value any
@@ -91,40 +101,14 @@ func TestMarshalSimpleType(t *testing.T) {
 
 
 
-/*
 		{
-			Value: [4]string{"once","twice","thrice","fource"},
-			Expected: false,
+			Value: TestMarshalSimpleType_type1{},
+			Expected: []byte(`"it worked!"`),
 		},
 		{
-			Value: []string{"once","twice","thrice","fource"},
-			Expected: false,
+			Value: TestMarshalSimpleType_type2{},
+			Expected: []byte(`["ONCE","TWICE","THRICE","FOURCE"]`),
 		},
-
-
-
-		{
-			Value: map[string]string{"once":"1","twice":"2","thrice":"3","fource":"4"},
-			Expected: false,
-		},
-
-
-
-		{
-			Value: struct{
-				Once string
-				Twice int
-				Thrice string
-				Fource int
-			}{
-				Once:"1",
-				Twice:2,
-				Thrice:"3",
-				Fource:4,
-			},
-			Expected: false,
-		},
-*/
 	}
 
 	for testNumber, test := range tests {
