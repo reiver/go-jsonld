@@ -11,6 +11,7 @@ func isSimpleType(value any) bool {
 
 	switch value.(type) {
 	case
+		json.Marshaler,
 		bool,
 		int,int8,int16,int32,int64,
 		string,
