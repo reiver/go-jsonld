@@ -9,7 +9,7 @@ func isSimpleType(value any) bool {
 		return true
 	}
 
-	switch casted := value.(type) {
+	switch value.(type) {
 	case json.Marshaler:
 		return true
 	case
