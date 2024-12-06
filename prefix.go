@@ -28,3 +28,6 @@ package jsonld
 // You coud name it anything you want (so long it is a valid Go field-name).
 // The name isn't the important part — the important part is the tag.
 type Prefix struct{}
+
+// This makes it so the JSON package used omits this, when used as a field on a struct or a value in a map, from the resulting JSON.
+func (Prefix) JSONOmitAlways() {}
