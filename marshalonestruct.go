@@ -1,6 +1,7 @@
 package jsonld
 
 import (
+	gobytes "bytes"
 	"reflect"
 
 	"github.com/reiver/go-erorr"
@@ -66,22 +67,26 @@ func nakedMarshalOneStruct(value any) ([]byte, error) {
 				continue
 			}
 
-			if comma {
-				bytes = append(bytes, ',')
-			}
-
-			bytes = append(bytes, json.MarshalString(name)...)
-
-			bytes = append(bytes, ':')
-
+			var result []byte
 			{
-				result, err := marshalOne(reflectedStructFieldValue.Interface())
+				var err error
+				result, err = marshalOne(reflectedStructFieldValue.Interface())
 				if nil != err {
 					return nil, erorr.Errorf("jsonld: problem marshaling field №%d (%q) of struct %T: %w", 1+index, reflectedStructFieldType.Name, value, err)
 				}
 
-				bytes = append(bytes, result...)
 			}
+			if omitEmpty && gobytes.Equal(emptyJSON, result) {
+				continue
+			}
+
+			if comma {
+				bytes = append(bytes, ',')
+				comma = true
+			}
+			bytes = append(bytes, json.MarshalString(name)...)
+			bytes = append(bytes, ':')
+			bytes = append(bytes, result...)
 
 			comma = true
 		}
