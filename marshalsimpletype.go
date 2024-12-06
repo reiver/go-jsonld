@@ -9,14 +9,16 @@ func isSimpleType(value any) bool {
 		return true
 	}
 
-	switch value.(type) {
+	switch casted := value.(type) {
+	case json.Marshaler:
+		return true
 	case
-		json.Marshaler,
 		bool,
 		int,int8,int16,int32,int64,
 		string,
 		uint,uint8,uint16,uint32,uint64:
 		return true
+
 	}
 
 	return false

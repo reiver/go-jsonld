@@ -8,7 +8,6 @@ import (
 	"github.com/reiver/go-json"
 )
 
-
 func marshalOneStruct(value any) ([]byte, error) {
 	result, err := nakedMarshalOneStruct(value)
 	if nil != err {
@@ -50,18 +49,27 @@ func nakedMarshalOneStruct(value any) ([]byte, error) {
 			var reflectedStructFieldValue reflect.Value       = reflectedStructValue.Field(index)
 			var reflectedStructFieldType  reflect.StructField = reflectedStructType.Field(index)
 
+			name, omitEmpty := parseStructField(reflectedStructFieldType)
+
+
 			if !reflectedStructFieldType.IsExported() {
 				continue
 			}
 
-			switch reflectedStructFieldValue.Interface().(type) {
+			switch casted := reflectedStructFieldValue.Interface().(type) {
 			case NameSpace:
 				continue
 			case Prefix:
 				continue
+			case Emptier:
+				if omitEmpty && casted.IsEmpty() {
+					continue
+				}
+			case Nothinger:
+				if omitEmpty && casted.IsNothing() {
+					continue
+				}
 			}
-
-			name, omitEmpty := parseStructField(reflectedStructFieldType)
 
 			if omitEmpty && isSimpleEmpty(reflectedStructFieldValue.Interface()) {
 				continue
