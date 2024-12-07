@@ -12,6 +12,10 @@ package jsonld
 //		FamilyName string `jsonld:"familyName"`
 //	}
 //
+// This would result in a JSON-LD @context similar to:
+//
+//	"@context":{"ex":"http://example.com/ns#", ...}
+//
 // And, another example:
 //
 //	type MyOtherType struct {
@@ -23,8 +27,27 @@ package jsonld
 //		NumCherries uint `jsonld:"NumCherries"`
 //	}
 //
+// This would result in a JSON-LD @context similar to:
+//
+//	"@context":{"fb":"http://fruitbasket.example/ns/", ...}
+//
+// And also, for example:
+//
+//	type YetAnotherType struct {
+//		NS jsonld.NameSpace `jsonld:"http://count.example/ns/"`
+//		
+//		Once   uint `jsonld:"once"`
+//		Twice  uint `jsonld:"twice"`
+//		Thrice uint `jsonld:"thrice"`
+//		Fource uint `jsonld:"fource"`
+//	}
+//
+// This would result in a JSON-LD @context similar to:
+//
+//	"@context":["http://count.example/ns/", ...]
+//
 // One thing to notice is that — it does not matter what the name of the field of type jsonld.NameSpace is.
-// In the first example it was "NameSpace". In the second example it was "JSONLDNameSpace".
+// In the first example it was "NameSpace". In the second example it was "JSONLDNameSpace". In the third example is was "NS".
 // You coud name it anything you want (so long it is a valid Go field-name).
 // The name isn't the important part — the important part is the tag.
 type NameSpace struct{}
