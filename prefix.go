@@ -8,8 +8,8 @@ package jsonld
 //		NameSpace jsonld.NameSpace `jsonld:"http://example.com/ns#"`
 //		Prefix    jsonld.Prefix    `jsonld:"ex"`
 //		
-//		GivenNames string `jsonld:"givenNames"`
-//		FamilyName string `jsonld:"familyName"`
+//		GivenNames string `json:"givenNames"`
+//		FamilyName string `json:"familyName"`
 //	}
 //
 // This would result in a JSON-LD @context similar to:
@@ -22,9 +22,9 @@ package jsonld
 //		JSONLDNameSpace jsonld.NameSpace `jsonld:"http://fruitbasket.example/ns/"`
 //		JSONLDPrefix    jsonld.Prefix    `jsonld:"fb"`
 //		
-//		NumApples   uint `jsonld:"NumApples"`
-//		NumBananas  uint `jsonld:"NumBananas"`
-//		NumCherries uint `jsonld:"NumCherries"`
+//		NumApples   uint `json:"NumApples"`
+//		NumBananas  uint `json:"NumBananas"`
+//		NumCherries uint `json:"NumCherries"`
 //	}
 //
 //

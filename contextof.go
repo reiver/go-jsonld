@@ -14,9 +14,9 @@ import (
 //		NameSpace jsonld.NameSpace `jsonld:"http://example.com/ns#"`
 //		Preix     jsonld.Prefix    `jsonld:"ex"`
 //		
-//		Apple  string `jsonld:"apple"`
-//		Banana int    `jsonld:"banana"`
-//		Cherry bool   `jsonld:"cherry"`
+//		Apple  string `json:"apple"`
+//		Banana int    `json:"banana"`
+//		Cherry bool   `json:"cherry"`
 //	}
 func ContextOf(value any) (Context, error) {
 	if nil == value {
