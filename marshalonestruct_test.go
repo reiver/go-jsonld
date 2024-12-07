@@ -29,7 +29,7 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple string `jsonld:"apple"`
+				Apple string `json:"apple"`
 			}{
 				Apple:"1",
 			},
@@ -50,7 +50,7 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple string `jsonld:"apple"`
+				Apple string `json:"apple"`
 				Banana int
 			}{
 				Apple:"1",
@@ -60,8 +60,8 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple string `jsonld:"apple"`
-				Banana int   `jsonld:"banana"`
+				Apple string `json:"apple"`
+				Banana int   `json:"banana"`
 			}{
 				Apple:"1",
 				Banana:2,
@@ -73,9 +73,9 @@ func TestMarshalOneStruct(t *testing.T) {
 
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry"`
+				Apple  string `json:"apple"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple:"1",
 				Banana:2,
@@ -88,9 +88,9 @@ func TestMarshalOneStruct(t *testing.T) {
 
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple,omitempty"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry,omitempty"`
+				Apple  string `json:"apple,omitempty"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry,omitempty"`
 			}{
 				Apple:"1",
 				Banana:2,
@@ -100,9 +100,9 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple,omitempty"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry,omitempty"`
+				Apple  string `json:"apple,omitempty"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry,omitempty"`
 			}{
 				Apple:"",
 				Banana:2,
@@ -112,9 +112,9 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple,omitempty"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry,omitempty"`
+				Apple  string `json:"apple,omitempty"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry,omitempty"`
 			}{
 				Apple:"1",
 				Banana:2,
@@ -124,9 +124,9 @@ func TestMarshalOneStruct(t *testing.T) {
 		},
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple,omitempty"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry,omitempty"`
+				Apple  string `json:"apple,omitempty"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry,omitempty"`
 			}{
 				Apple:"",
 				Banana:2,
@@ -139,9 +139,9 @@ func TestMarshalOneStruct(t *testing.T) {
 
 		{
 			Value: struct{
-				Apple  string `jsonld:"apple,omitempty"`
-				Banana int    `jsonld:"banana"`
-				Cherry string `jsonld:"cherry,omitempty"`
+				Apple  string `json:"apple,omitempty"`
+				Banana int    `json:"banana"`
+				Cherry string `json:"cherry,omitempty"`
 				date   int 
 			}{
 				Apple:"",

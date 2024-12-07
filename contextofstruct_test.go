@@ -41,7 +41,7 @@ func TestContextOfStruct(t *testing.T) {
 
 		{
 			Struct: struct{
-				Apple string  `jsonld:"apple"`
+				Apple string  `json:"apple"`
 				Banana string
 				Cherry string
 			}{
@@ -60,7 +60,7 @@ func TestContextOfStruct(t *testing.T) {
 		{
 			Struct: struct{
 				Apple string
-				Banana string `jsonld:"banana"`
+				Banana string `json:"banana"`
 				Cherry string
 			}{
 				Apple: "ONE",
@@ -79,7 +79,7 @@ func TestContextOfStruct(t *testing.T) {
 			Struct: struct{
 				Apple string
 				Banana string
-				Cherry string `jsonld:"cherry"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -99,8 +99,8 @@ func TestContextOfStruct(t *testing.T) {
 		{
 			Struct: struct{
 				Apple string
-				Banana string `jsonld:"banana"`
-				Cherry string `jsonld:"cherry"`
+				Banana string `json:"banana"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -116,9 +116,9 @@ func TestContextOfStruct(t *testing.T) {
 		},
 		{
 			Struct: struct{
-				Apple string  `jsonld:"apple"`
+				Apple string  `json:"apple"`
 				Banana string
-				Cherry string `jsonld:"cherry"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -134,8 +134,8 @@ func TestContextOfStruct(t *testing.T) {
 		},
 		{
 			Struct: struct{
-				Apple string  `jsonld:"apple"`
-				Banana string `jsonld:"banana"`
+				Apple string  `json:"apple"`
+				Banana string `json:"banana"`
 				Cherry string
 			}{
 				Apple: "ONE",
@@ -155,9 +155,9 @@ func TestContextOfStruct(t *testing.T) {
 
 		{
 			Struct: struct{
-				Apple string  `jsonld:"apple"`
-				Banana string `jsonld:"banana"`
-				Cherry string `jsonld:"cherry"`
+				Apple string  `json:"apple"`
+				Banana string `json:"banana"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -177,9 +177,9 @@ func TestContextOfStruct(t *testing.T) {
 		{
 			Struct: struct{
 				NameSpace NameSpace `jsonld:"http://example.com/ns/"`
-				Apple string  `jsonld:"apple"`
-				Banana string `jsonld:"banana"`
-				Cherry string `jsonld:"cherry"`
+				Apple string  `json:"apple"`
+				Banana string `json:"banana"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -201,9 +201,9 @@ func TestContextOfStruct(t *testing.T) {
 			Struct: struct{
 				NameSpace NameSpace `jsonld:"http://example.com/ns/"`
 				Prefix Prefix `jsonld:"ex"`
-				Apple string  `jsonld:"apple"`
-				Banana string `jsonld:"banana"`
-				Cherry string `jsonld:"cherry"`
+				Apple string  `json:"apple"`
+				Banana string `json:"banana"`
+				Cherry string `json:"cherry"`
 			}{
 				Apple: "ONE",
 				Banana: "2",
@@ -217,6 +217,26 @@ func TestContextOfStruct(t *testing.T) {
 					"banana",
 					"cherry",
 				},
+			},
+		},
+
+
+		{
+			Struct: struct{
+				NS NameSpace `jsonld:"http://example.com/ns#"`
+				P  Prefix    `jsonld:"ex"`
+				Apple string `json:"apple"`
+				Banana int
+				Cherry bool  `json:"cherry"`
+			}{
+				Apple: "ONE",
+				Banana: 2,
+				Cherry: true,
+			},
+			Expected: Context{
+				NameSpace: "http://example.com/ns#",
+				Prefix: "ex",
+				Names: []string{"apple","Banana","cherry"},
 			},
 		},
 	}

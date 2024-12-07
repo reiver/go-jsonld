@@ -9,7 +9,7 @@ func parseStructField(structField reflect.StructField) (name string, omitEmpty b
 
 	name = structField.Name
 
-	tagvalue, found := structField.Tag.Lookup(structTagName)
+	tagvalue, found := structField.Tag.Lookup(structTagNameJSON)
 	if !found {
 		return
 	}

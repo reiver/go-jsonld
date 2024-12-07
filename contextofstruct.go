@@ -41,13 +41,13 @@ func contextOfStruct(value any) (Context, error) {
 
 			switch reflectedFieldValue.Interface().(type) {
 			case NameSpace:
-				value, found := structField.Tag.Lookup(structTagName)
+				value, found := structField.Tag.Lookup(structTagNameJSONLD)
 				if found {
 					context.NameSpace = value
 				}
 
 			case Prefix:
-				value, found := structField.Tag.Lookup(structTagName)
+				value, found := structField.Tag.Lookup(structTagNameJSONLD)
 				if found {
 					context.Prefix = value
 				}

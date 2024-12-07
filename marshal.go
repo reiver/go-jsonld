@@ -1,7 +1,7 @@
 package jsonld
 
 import (
-	gobytes "bytes"
+	"bytes"
 	"reflect"
 
 	"github.com/reiver/go-erorr"
@@ -9,6 +9,9 @@ import (
 )
 
 var emptyJSON []byte = []byte(`{}`)
+
+var badPrefix1 []byte = []byte(`{"@context":{},`)
+var badPrefix2 []byte = []byte(`{"@context":{}}`)
 
 // Marshal returns the (merged) JSON-LD encoding of a series of values.
 //
@@ -20,7 +23,12 @@ func Marshal(values ...any) ([]byte, error) {
 		var reflectedType reflect.Type = reflect.TypeOf(value)
 		var kind reflect.Kind = reflectedType.Kind()
 		if reflect.Struct != kind && reflect.Map != kind {
-			return nil, erorr.Errorf("jsonld: cannot marshal value №%d of type %T — type must be struct or map", 1+index, value)
+			switch value.(type) {
+			case json.Marshaler:
+				// this is ok
+			default:
+				return nil, erorr.Errorf("jsonld: cannot marshal value №%d of type %T — type must be struct or map", 1+index, value)
+			}
 		}
 	}
 
@@ -36,56 +44,27 @@ func Marshal(values ...any) ([]byte, error) {
 		}
 	}
 
-	return marshal(contexts, values...)
-}
-
-func marshal(contexts []Context, values ...any) ([]byte, error) {
-	var bytes []byte
-
-	bytes = append(bytes, '{')
-
-	var hasContext bool = false
-	if 0 < len(contexts) {
-		result, err := MarshalContexts(contexts...)
-		if nil != err {
-			return nil, err
-		}
-
-		if !gobytes.Equal(emptyJSON, result) {
-			bytes = append(bytes, json.MarshalString("@context")...)
-			bytes = append(bytes, ':')
-			bytes = append(bytes, result...)
-			hasContext = true
-		}
+	var ctx = struct{
+		CTX Contexts `json:"@context,omitempty"`
+	}{
+		CTX: Contexts(contexts),
 	}
 
-	var comma bool = false
-	if hasContext {
-		comma = true
-	}
+	values = append([]any{ctx}, values...)
 
 	{
-		for index, value := range values {
+		result, err := json.MergeAndMarshal(values...)
 
-			result, err := nakedMarshalOne(value)
-			if nil != err {
-				return nil, erorr.Errorf("jsonld: problem marshaling value №%d of type %T: %w", 1+index, value, err)
-			}
-			if len(result) <= 0 {
-				continue
-			}
-
-			if comma {
-				bytes = append(bytes, ',')
-			}
-			comma = true
-
-			bytes = append(bytes, result...)
-
+//@TODO: should not need to do this.
+		if nil == err && bytes.HasPrefix(result,badPrefix1) {
+			result = result[len(badPrefix1)-1:]
+			result[0] = '{'
 		}
+		if nil == err && bytes.HasPrefix(result,badPrefix2) {
+			result = result[len(badPrefix2)-2:]
+			result[0] = '{'
+		}
+
+		return result, err
 	}
-
-	bytes = append(bytes, '}')
-
-	return bytes, nil
 }

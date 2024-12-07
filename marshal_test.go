@@ -5,10 +5,28 @@ import (
 
 	"bytes"
 
+	"github.com/reiver/go-opt"
+
 	"github.com/reiver/go-jsonld"
 )
 
+
 func TestMarshal(t *testing.T) {
+
+	type FruitBasket struct {
+		Apple string                `json:"apple,omitempty"`
+		Banana opt.Optional[string] `json:"banana,omitempty"`
+		Cherry opt.Optional[int64]  `json:"cherry,omitempty"`
+	}
+
+	type TestStruct1 struct{
+		one string
+		two int
+
+		Three string                    `json:"three,omitempty"`
+		Four  opt.Optional[string]      `json:"four,omitempty"`
+		Five  opt.Optional[FruitBasket] `json:"five,omitempty"`
+	}
 
 	tests := []struct{
 		Values []any
@@ -50,9 +68,9 @@ func TestMarshal(t *testing.T) {
 		{
 			Values: []any{
 				struct{
-					Apple string `jsonld:"apple"`
+					Apple string `json:"apple"`
 					Banana int
-					Cherry bool  `jsonld:"cherry"`
+					Cherry bool  `json:"cherry"`
 				}{
 					Apple: "ONE",
 					Banana: 2,
@@ -75,9 +93,9 @@ func TestMarshal(t *testing.T) {
 		{
 			Values: []any{
 				struct{
-					Apple string `jsonld:"apple"`
-					Banana int   `jsonld:"banana"`
-					Cherry bool  `jsonld:"cherry"`
+					Apple string `json:"apple"`
+					Banana int   `json:"banana"`
+					Cherry bool  `json:"cherry"`
 				}{
 					Apple: "ONE",
 					Banana: 2,
@@ -101,9 +119,9 @@ func TestMarshal(t *testing.T) {
 			Values: []any{
 				struct{
 					NS jsonld.NameSpace `jsonld:"http://example.com/ns#"`
-					Apple string `jsonld:"apple"`
+					Apple string `json:"apple"`
 					Banana int
-					Cherry bool  `jsonld:"cherry"`
+					Cherry bool  `json:"cherry"`
 				}{
 					Apple: "ONE",
 					Banana: 2,
@@ -132,9 +150,9 @@ func TestMarshal(t *testing.T) {
 				struct{
 					NS jsonld.NameSpace `jsonld:"http://example.com/ns#"`
 					P  jsonld.Prefix    `jsonld:"ex"`
-					Apple string `jsonld:"apple"`
+					Apple string `json:"apple"`
 					Banana int
-					Cherry bool  `jsonld:"cherry"`
+					Cherry bool  `json:"cherry"`
 				}{
 					Apple: "ONE",
 					Banana: 2,
@@ -170,15 +188,15 @@ func TestMarshal(t *testing.T) {
 					NameSpace jsonld.NameSpace `jsonld:"http://joinmastodon.org/ns#"`
 					Prefix    jsonld.Prefix    `jsonld:"toot"`
 
-					AttributionDomains string `jsonld:"attributionDomains"`
+					AttributionDomains string `json:"attributionDomains"`
 					Emoji              string
-					Discoverable       bool   `jsonld:"discoverable"`
-					Featured           bool   `jsonld:"featured"`
-					FeaturedTags       string `jsonld:"featuredTags"`
-					FocalPoint       []any    `jsonld:"focalPoint"`
-					Indexable          bool   `jsonld:"indexable"`
-					Memorial           bool   `jsonld:"memorial"`
-					Suspended          bool   `jsonld:"suspended"`
+					Discoverable       bool   `json:"discoverable"`
+					Featured           bool   `json:"featured"`
+					FeaturedTags       string `json:"featuredTags"`
+					FocalPoint       []any    `json:"focalPoint"`
+					Indexable          bool   `json:"indexable"`
+					Memorial           bool   `json:"memorial"`
+					Suspended          bool   `json:"suspended"`
 				}{
 					Discoverable: true,
 					Featured:     true,
@@ -239,10 +257,10 @@ func TestMarshal(t *testing.T) {
 		{
 			Values: []any{
 				struct{
-					ID      string `jsonld:"id"`
-					Name    string `jsonld:"name"`
-					Summary string `jsonld:"summary"`
-					Type    string `jsonld:"type"`
+					ID      string `json:"id"`
+					Name    string `json:"name"`
+					Summary string `json:"summary"`
+					Type    string `json:"type"`
 				}{
 					ID: "urn:uuid:88c6a753-d6d5-45eb-bc18-9b1089e7b1f8",
 					Name: "Joe Blow",
@@ -253,15 +271,15 @@ func TestMarshal(t *testing.T) {
 					NameSpace jsonld.NameSpace `jsonld:"http://joinmastodon.org/ns#"`
 					Prefix    jsonld.Prefix    `jsonld:"toot"`
 
-					AttributionDomains string `jsonld:"attributionDomains"`
+					AttributionDomains string `json:"attributionDomains"`
 					Emoji              string
-					Discoverable       bool   `jsonld:"discoverable"`
-					Featured           bool   `jsonld:"featured"`
-					FeaturedTags       string `jsonld:"featuredTags"`
-					FocalPoint       []any    `jsonld:"focalPoint"`
-					Indexable          bool   `jsonld:"indexable"`
-					Memorial           bool   `jsonld:"memorial"`
-					Suspended          bool   `jsonld:"suspended"`
+					Discoverable       bool   `json:"discoverable"`
+					Featured           bool   `json:"featured"`
+					FeaturedTags       string `json:"featuredTags"`
+					FocalPoint       []any    `json:"focalPoint"`
+					Indexable          bool   `json:"indexable"`
+					Memorial           bool   `json:"memorial"`
+					Suspended          bool   `json:"suspended"`
 				}{
 					Discoverable: true,
 					Featured:     true,
@@ -275,9 +293,9 @@ func TestMarshal(t *testing.T) {
 					NameSpace jsonld.NameSpace `jsonld:"https://www.w3.org/ns/activitystreams"`
 					Prefix    jsonld.Prefix    `jsonld:"as"`
 
-					AlsoKnownAs []string `jsonld:"alsoKnownAs"`
-					Hashtag     []string `jsonld:"Hashtag"`
-					MovedTo       string `jsonld:"movedTo"`
+					AlsoKnownAs []string `json:"alsoKnownAs"`
+					Hashtag     []string `json:"Hashtag"`
+					MovedTo       string `json:"movedTo"`
 				}{
 					Hashtag: []string{
 						"#fediverse",
@@ -286,13 +304,13 @@ func TestMarshal(t *testing.T) {
 				struct{
 					NameSpace jsonld.NameSpace `jsonld:"https://w3id.org/security/v1"`
 
-					Signature string `jsonld:"signature"`
+					Signature string `json:"signature"`
 				}{
 				},
 				struct{
 					NameSpace jsonld.NameSpace `jsonld:"https://banana.example/ns#"`
 
-					Color string `jsonld:"colour"`
+					Color string `json:"colour"`
 				}{
 					Color: "yellow",
 				},
@@ -392,10 +410,10 @@ func TestMarshal(t *testing.T) {
 		{
 			Values: []any{
 				struct{
-					ID      string `jsonld:"id"`
-					Name    string `jsonld:"name"`
-					Summary string `jsonld:"summary"`
-					Type    string `jsonld:"type"`
+					ID      string `json:"id"`
+					Name    string `json:"name"`
+					Summary string `json:"summary"`
+					Type    string `json:"type"`
 				}{
 					ID: "urn:uuid:88c6a753-d6d5-45eb-bc18-9b1089e7b1f8",
 					Name: "Joe Blow",
@@ -406,15 +424,15 @@ func TestMarshal(t *testing.T) {
 					NameSpace jsonld.NameSpace `jsonld:"http://joinmastodon.org/ns#"`
 					Prefix    jsonld.Prefix    `jsonld:"toot"`
 
-					AttributionDomains string `jsonld:"attributionDomains,omitempty"`
-					Emoji              string `jsonld:",omitempty"`
-					Discoverable       bool   `jsonld:"discoverable"`
-					Featured           bool   `jsonld:"featured"`
-					FeaturedTags       string `jsonld:"featuredTags,omitempty"`
-					FocalPoint       []any    `jsonld:"focalPoint,omitempty"`
-					Indexable          bool   `jsonld:"indexable"`
-					Memorial           bool   `jsonld:"memorial"`
-					Suspended          bool   `jsonld:"suspended"`
+					AttributionDomains string `json:"attributionDomains,omitempty"`
+					Emoji              string `json:",omitempty"`
+					Discoverable       bool   `json:"discoverable"`
+					Featured           bool   `json:"featured"`
+					FeaturedTags       string `json:"featuredTags,omitempty"`
+					FocalPoint       []any    `json:"focalPoint,omitempty"`
+					Indexable          bool   `json:"indexable"`
+					Memorial           bool   `json:"memorial"`
+					Suspended          bool   `json:"suspended"`
 				}{
 					Discoverable: true,
 					Featured:     true,
@@ -428,9 +446,9 @@ func TestMarshal(t *testing.T) {
 					NameSpace jsonld.NameSpace `jsonld:"https://www.w3.org/ns/activitystreams"`
 					Prefix    jsonld.Prefix    `jsonld:"as"`
 
-					AlsoKnownAs []string `jsonld:"alsoKnownAs,omitempty"`
-					HashTag     []string `jsonld:"Hashtag,omitempty"`
-					MovedTo       string `jsonld:"movedTo,omitempty"`
+					AlsoKnownAs []string `json:"alsoKnownAs,omitempty"`
+					HashTag     []string `json:"Hashtag,omitempty"`
+					MovedTo       string `json:"movedTo,omitempty"`
 				}{
 					HashTag: []string{
 						"#fediverse",
@@ -439,13 +457,13 @@ func TestMarshal(t *testing.T) {
 				struct{
 					NameSpace jsonld.NameSpace `jsonld:"https://w3id.org/security/v1"`
 
-					Signature string `jsonld:"signature,omitempty"`
+					Signature string `json:"signature,omitempty"`
 				}{
 				},
 				struct{
 					NameSpace jsonld.NameSpace `jsonld:"https://banana.example/ns#"`
 
-					Color string `jsonld:"colour"`
+					Color string `json:"colour"`
 				}{
 					Color: "yellow",
 				},
@@ -538,9 +556,9 @@ func TestMarshal(t *testing.T) {
 		{
 			Values: []any{
 				struct{
-					Apple  string `jsonld:"apple,omitempty"`
-					Banana int    `jsonld:"banana"`
-					Cherry string `jsonld:"cherry,omitempty"`
+					Apple  string `json:"apple,omitempty"`
+					Banana int    `json:"banana"`
+					Cherry string `json:"cherry,omitempty"`
 					date   int
 				}{
 					Apple:"",
@@ -550,6 +568,21 @@ func TestMarshal(t *testing.T) {
 				},
 			},
 			Expected: []byte(`{"banana":2}`),
+		},
+
+
+
+
+
+
+
+
+		// 10
+		{
+			Values: []any{
+				TestStruct1{},
+			},
+			Expected: []byte(`{}`),
 		},
 	}
 

@@ -22,52 +22,21 @@ func TestParseStructField(t *testing.T) {
 		},
 		{
 			Value: struct{
-				First bool `jsonld:"first"`
+				First bool `json:"first"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: false,
 		},
 		{
 			Value: struct{
-				First bool `jsonld:",omitempty"`
+				First bool `json:",omitempty"`
 			}{},
 			ExpectedName: "First",
 			ExpectedOmitEmpty: true,
 		},
 		{
 			Value: struct{
-				First bool `jsonld:"first,omitempty"`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: true,
-		},
-
-
-
-		{
-			Value: struct{
-				First string
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"first"`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:",omitempty"`
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: true,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"first,omitempty"`
+				First bool `json:"first,omitempty"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
@@ -84,52 +53,21 @@ func TestParseStructField(t *testing.T) {
 		},
 		{
 			Value: struct{
-				First string `jsonld:" first"`
+				First string `json:"first"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: false,
 		},
 		{
 			Value: struct{
-				First string `jsonld:",omitempty"`
+				First string `json:",omitempty"`
 			}{},
 			ExpectedName: "First",
 			ExpectedOmitEmpty: true,
 		},
 		{
 			Value: struct{
-				First string `jsonld:" first,omitempty"`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: true,
-		},
-
-
-
-		{
-			Value: struct{
-				First string
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"first "`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:",omitempty"`
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: true,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"first ,omitempty"`
+				First string `json:"first,omitempty"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
@@ -146,52 +84,21 @@ func TestParseStructField(t *testing.T) {
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first "`
+				First string `json:" first"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: false,
 		},
 		{
 			Value: struct{
-				First string `jsonld:",omitempty"`
+				First string `json:",omitempty"`
 			}{},
 			ExpectedName: "First",
 			ExpectedOmitEmpty: true,
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first ,omitempty"`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: true,
-		},
-
-
-
-		{
-			Value: struct{
-				First string
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"  first "`
-			}{},
-			ExpectedName: "first",
-			ExpectedOmitEmpty: false,
-		},
-		{
-			Value: struct{
-				First string `jsonld:", omitempty"`
-			}{},
-			ExpectedName: "First",
-			ExpectedOmitEmpty: true,
-		},
-		{
-			Value: struct{
-				First string `jsonld:"  first , omitempty"`
+				First string `json:" first,omitempty"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
@@ -208,21 +115,21 @@ func TestParseStructField(t *testing.T) {
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first "`
+				First string `json:"first "`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: false,
 		},
 		{
 			Value: struct{
-				First string `jsonld:",omitempty "`
+				First string `json:",omitempty"`
 			}{},
 			ExpectedName: "First",
 			ExpectedOmitEmpty: true,
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first ,omitempty "`
+				First string `json:"first ,omitempty"`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
@@ -239,21 +146,114 @@ func TestParseStructField(t *testing.T) {
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first "`
+				First string `json:"  first "`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: false,
 		},
 		{
 			Value: struct{
-				First string `jsonld:", omitempty  "`
+				First string `json:",omitempty"`
 			}{},
 			ExpectedName: "First",
 			ExpectedOmitEmpty: true,
 		},
 		{
 			Value: struct{
-				First string `jsonld:"  first , omitempty  "`
+				First string `json:"  first ,omitempty"`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: true,
+		},
+
+
+
+		{
+			Value: struct{
+				First string
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:"  first "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:", omitempty"`
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: true,
+		},
+		{
+			Value: struct{
+				First string `json:"  first , omitempty"`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: true,
+		},
+
+
+
+		{
+			Value: struct{
+				First string
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:"  first "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:",omitempty "`
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: true,
+		},
+		{
+			Value: struct{
+				First string `json:"  first ,omitempty "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: true,
+		},
+
+
+
+		{
+			Value: struct{
+				First string
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:"  first "`
+			}{},
+			ExpectedName: "first",
+			ExpectedOmitEmpty: false,
+		},
+		{
+			Value: struct{
+				First string `json:", omitempty  "`
+			}{},
+			ExpectedName: "First",
+			ExpectedOmitEmpty: true,
+		},
+		{
+			Value: struct{
+				First string `json:"  first , omitempty  "`
 			}{},
 			ExpectedName: "first",
 			ExpectedOmitEmpty: true,
