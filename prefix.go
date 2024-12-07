@@ -14,7 +14,8 @@ package jsonld
 //
 // This would result in a JSON-LD @context similar to:
 //
-//	"@context":{"ex":"http://example.com/ns#", ...}//
+//	"@context":{"ex":"http://example.com/ns#", ...}
+//
 // And, another example:
 //
 //	type MyOtherType struct {
