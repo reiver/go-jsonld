@@ -12,6 +12,9 @@ package jsonld
 //		FamilyName string `jsonld:"familyName"`
 //	}
 //
+// This would result in a JSON-LD @context similar to:
+//
+//	"@context":{"ex":"http://example.com/ns#", ...}//
 // And, another example:
 //
 //	type MyOtherType struct {
@@ -22,6 +25,11 @@ package jsonld
 //		NumBananas  uint `jsonld:"NumBananas"`
 //		NumCherries uint `jsonld:"NumCherries"`
 //	}
+//
+//
+// This would result in a JSON-LD @context similar to:
+//
+//	"@context":{"fb":"http://fruitbasket.example/ns/", ...}
 //
 // One thing to notice is that — it does not matter what the name of the field of type jsonld.Prefix is.
 // In the first example it was "NameSpace". In the second example it was "JSONLDNameSpace".
