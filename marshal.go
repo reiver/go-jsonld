@@ -34,32 +34,13 @@ func Marshal(values ...any) ([]byte, error) {
 
 	var contexts []Context
 	{
-		var contextsMap map[string]*Context = map[string]*Context{}
+		var err error
 
-		for _, value := range values {
-			if reflect.Struct != reflect.TypeOf(value).Kind() {
-				continue
-			}
-
-			ctxs, err := DeepContextsOf(value)
-			if nil != err {
-				return nil, err
-			}
-
-			for _, ctx := range ctxs {
-				var ns string = ctx.NameSpace
-
-				contextPointer, found := contextsMap[ns]
-				if found {
-					contextPointer.Names = append(contextPointer.Names)
-				} else {
-					contexts = append(contexts, ctx)
-					contextsMap[ctx.NameSpace] = &(contexts[len(contexts)-1])
-				}
-			}
+		contexts, err = deepContextsOfMany(values...)
+		if nil != err {
+			return nil, err
 		}
 	}
-//@TODO: sort names
 
 	var ctx = struct{
 		CTX Contexts `json:"@context,omitempty"`

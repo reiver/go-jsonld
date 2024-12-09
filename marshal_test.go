@@ -621,6 +621,105 @@ func TestMarshal(t *testing.T) {
 			},
 			Expected: []byte(`{"@context":["http://ns.example/outer","http://example.com/inner"],"one":"1","something":{"three":3}}`),
 		},
+
+
+
+
+
+
+
+
+
+		// 12
+		{
+			Values: []any{
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"http://ns.example/outer"`
+
+					One string `json:"one,omitempty"`
+					Two string `json:"two,omitempty"`
+					Something struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					} `json:"something,omitempty"`
+					Else struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						A string `json:"a,omitempty,bare"`
+						Z string `json:"z,omitempty,bare"`
+					} `json:"else,omitempty"`
+				}{
+					One: "1",
+					Something: struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					}{
+						Three: "3",
+					},
+					Else: struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						A string `json:"a,omitempty,bare"`
+						Z string `json:"z,omitempty,bare"`
+					}{
+						A: "1111",
+						Z: "2626",
+					},
+				},
+			},
+			Expected: []byte(`{"@context":["http://ns.example/outer","http://example.com/inner"],"one":"1","something":{"three":3},"else":{"a":1111,"z":2626}}`),
+		},
+		// 13
+		{
+			Values: []any{
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"http://ns.example/outer"`
+
+					One string `json:"one,omitempty"`
+					Two string `json:"two,omitempty"`
+					Something struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+						Prefix    jsonld.Prefix    `jsonld:"inn"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					} `json:"something,omitempty"`
+					Else struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+						Prefix    jsonld.Prefix    `jsonld:"inn"`
+
+						A string `json:"a,omitempty,bare"`
+						Z string `json:"z,omitempty,bare"`
+					} `json:"else,omitempty"`
+				}{
+					One: "1",
+					Something: struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+						Prefix    jsonld.Prefix    `jsonld:"inn"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					}{
+						Three: "3",
+					},
+					Else: struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+						Prefix    jsonld.Prefix    `jsonld:"inn"`
+
+						A string `json:"a,omitempty,bare"`
+						Z string `json:"z,omitempty,bare"`
+					}{
+						A: "1111",
+						Z: "2626",
+					},
+				},
+			},
+			Expected: []byte(`{"@context":["http://ns.example/outer",{"inn":"http://example.com/inner","a":"inn:a","four":"inn:four","three":"inn:three","z":"inn:z"}],"one":"1","something":{"three":3},"else":{"a":1111,"z":2626}}`),
+		},
 	}
 
 	for testNumber, test := range tests {
