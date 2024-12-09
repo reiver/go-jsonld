@@ -35,6 +35,9 @@ func Marshal(values ...any) ([]byte, error) {
 	var contexts []Context
 	{
 		for _, value := range values {
+			if reflect.Struct != reflect.TypeOf(value).Kind() {
+				continue
+			}
 			context, err := ContextOf(value)
 			if nil != err {
 				return nil, err
