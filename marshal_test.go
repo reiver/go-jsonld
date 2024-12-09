@@ -164,9 +164,9 @@ func TestMarshal(t *testing.T) {
 					`"@context":{`+
 						`"ex":"http://example.com/ns#"`+
 						`,`+
-						`"apple":"ex:apple"`+
-						`,`+
 						`"Banana":"ex:Banana"`+
+						`,`+
+						`"apple":"ex:apple"`+
 						`,`+
 						`"cherry":"ex:cherry"`+
 					`}`+
@@ -212,9 +212,9 @@ func TestMarshal(t *testing.T) {
 					`"@context":{`+
 						`"toot":"http://joinmastodon.org/ns#"`+
 						`,`+
-						`"attributionDomains":"toot:attributionDomains"`+
-						`,`+
 						`"Emoji":"toot:Emoji"`+
+						`,`+
+						`"attributionDomains":"toot:attributionDomains"`+
 						`,`+
 						`"discoverable":"toot:discoverable"`+
 						`,`+
@@ -329,9 +329,9 @@ func TestMarshal(t *testing.T) {
 
 							`,`+
 
-							`"attributionDomains":"toot:attributionDomains"`+
-							`,`+
 							`"Emoji":"toot:Emoji"`+
+							`,`+
+							`"attributionDomains":"toot:attributionDomains"`+
 							`,`+
 							`"discoverable":"toot:discoverable"`+
 							`,`+
@@ -349,9 +349,9 @@ func TestMarshal(t *testing.T) {
 
 							`,`+
 
-							`"alsoKnownAs":"as:alsoKnownAs"`+
-							`,`+
 							`"Hashtag":"as:Hashtag"`+
+							`,`+
+							`"alsoKnownAs":"as:alsoKnownAs"`+
 							`,`+
 							`"movedTo":"as:movedTo"`+
 						`}`+
@@ -482,9 +482,9 @@ func TestMarshal(t *testing.T) {
 
 							`,`+
 
-							`"attributionDomains":"toot:attributionDomains"`+
-							`,`+
 							`"Emoji":"toot:Emoji"`+
+							`,`+
+							`"attributionDomains":"toot:attributionDomains"`+
 							`,`+
 							`"discoverable":"toot:discoverable"`+
 							`,`+
@@ -502,9 +502,9 @@ func TestMarshal(t *testing.T) {
 
 							`,`+
 
-							`"alsoKnownAs":"as:alsoKnownAs"`+
-							`,`+
 							`"Hashtag":"as:Hashtag"`+
+							`,`+
+							`"alsoKnownAs":"as:alsoKnownAs"`+
 							`,`+
 							`"movedTo":"as:movedTo"`+
 						`}`+

@@ -36,6 +36,60 @@ func TestContextOfStruct(t *testing.T) {
 				},
 			},
 		},
+		{
+			Struct: struct{
+				Banana string
+				Cherry string
+				Apple string
+			}{
+				Banana: "2",
+				Cherry: "پ",
+				Apple: "ONE",
+			},
+			Expected: Context{
+				Names: []string{
+					"Apple",
+					"Banana",
+					"Cherry",
+				},
+			},
+		},
+		{
+			Struct: struct{
+				Cherry string
+				Apple string
+				Banana string
+			}{
+				Cherry: "پ",
+				Apple: "ONE",
+				Banana: "2",
+			},
+			Expected: Context{
+				Names: []string{
+					"Apple",
+					"Banana",
+					"Cherry",
+				},
+			},
+		},
+		{
+			Struct: struct{
+				Cherry string
+				Banana string
+				Apple string
+			}{
+				Cherry: "پ",
+				Banana: "2",
+				Apple: "ONE",
+			},
+			Expected: Context{
+				Names: []string{
+					"Apple",
+					"Banana",
+					"Cherry",
+				},
+			},
+		},
 
 
 
@@ -51,9 +105,9 @@ func TestContextOfStruct(t *testing.T) {
 			},
 			Expected: Context{
 				Names: []string{
-					"apple",
 					"Banana",
 					"Cherry",
+					"apple",
 				},
 			},
 		},
@@ -70,8 +124,8 @@ func TestContextOfStruct(t *testing.T) {
 			Expected: Context{
 				Names: []string{
 					"Apple",
-					"banana",
 					"Cherry",
+					"banana",
 				},
 			},
 		},
@@ -126,8 +180,8 @@ func TestContextOfStruct(t *testing.T) {
 			},
 			Expected: Context{
 				Names: []string{
-					"apple",
 					"Banana",
+					"apple",
 					"cherry",
 				},
 			},
@@ -144,9 +198,9 @@ func TestContextOfStruct(t *testing.T) {
 			},
 			Expected: Context{
 				Names: []string{
+					"Cherry",
 					"apple",
 					"banana",
-					"Cherry",
 				},
 			},
 		},
@@ -236,12 +290,17 @@ func TestContextOfStruct(t *testing.T) {
 			Expected: Context{
 				NameSpace: "http://example.com/ns#",
 				Prefix: "ex",
-				Names: []string{"apple","Banana","cherry"},
+				Names: []string{
+					"Banana",
+					"apple",
+					"cherry",
+				},
 			},
 		},
 	}
 
 	for testNumber, test := range tests {
+
 
 		actual, err := contextOfStruct(test.Struct)
 		if nil != err {

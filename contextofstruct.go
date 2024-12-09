@@ -2,6 +2,7 @@ package jsonld
 
 import (
 	"reflect"
+	"sort"
 )
 
 func contextOfStruct(value any) (Context, error) {
@@ -59,6 +60,8 @@ func contextOfStruct(value any) (Context, error) {
 			}
 		}
 	}
+
+	sort.Strings(context.Names)
 
 	return context, nil
 }
