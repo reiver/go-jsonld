@@ -584,6 +584,43 @@ func TestMarshal(t *testing.T) {
 			},
 			Expected: []byte(`{}`),
 		},
+
+
+
+
+
+
+
+
+
+		// 11
+		{
+			Values: []any{
+				struct{
+					NameSpace jsonld.NameSpace `jsonld:"http://ns.example/outer"`
+
+					One string `json:"one,omitempty"`
+					Two string `json:"two,omitempty"`
+					Something struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					} `json:"something,omitempty"`
+				}{
+					One: "1",
+					Something: struct{
+						NameSpace jsonld.NameSpace `jsonld:"http://example.com/inner"`
+
+						Three string `json:"three,omitempty,bare"`
+						Four string `json:"four,omitempty,bare"`
+					}{
+						Three: "3",
+					},
+				},
+			},
+			Expected: []byte(`{"@context":["http://ns.example/outer","http://example.com/inner"],"one":"1","something":{"three":3}}`),
+		},
 	}
 
 	for testNumber, test := range tests {
