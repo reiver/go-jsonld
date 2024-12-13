@@ -12,7 +12,7 @@ Online documentation, which includes examples, can be found at: http://godoc.org
 
 ## Example
 
-Here is a simple example with only one namespace:
+Here is a simple example with only one JSON-LD namespace:
 
 ```golang
 import "github.com/reiver/go-jsonld"
@@ -36,6 +36,37 @@ type MyStruct struct {
 var value MyStruct // = ...
 
 bytes, err := jsonld.Marshal(value)
+```
+
+Here is a more typical example with multiple JSON-LD namespaces.
+
+```golang
+import "github.com/reiver/go-jsonld"
+
+// ...
+
+type Person struct {
+	NameSpace jsonld.NameSpace `jsonld:"http://ns.example/person"`
+	Prefix    jsonld.Prefix    `jsonld:"person"`
+
+	GivenName         string `json:"given-name,omitempty"`
+	AdditionalNames []string `json:"additional-names,omitempty"`
+	FamilyName        string `json:"family-name,omitempty"`
+}
+
+type Programmer struct {
+	NameSpace jsonld.NameSpace `jsonld:"http://example.com/programmer"`
+	Prefix    jsonld.Prefix    `jsonld:"programmer"`
+
+	ProgrammingLanguage string `json:"programming-language,omitempty"`
+}
+
+// ...
+
+var person Person // = ...
+var programmer Programmer // = ...
+
+bytes, err := jsonld.Marshal(person, programmer)
 ```
 
 ## Import
