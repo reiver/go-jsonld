@@ -114,7 +114,7 @@ func TestNameSpace_JSONOmitAlways(t *testing.T) {
 
 	for testNumber, test := range tests {
 
-		actual, err := json.Marshal(test.Value)
+		actual, err := json.Marshal(test.Value) // <--------- note that is json.Marshal() and not jsonld.Marshal()
 		if nil != err{
 			t.Errorf("For test #%d, did not expect an error but actually got one.", testNumber)
 			t.Logf("EROR: (%T) %s", err, err)
