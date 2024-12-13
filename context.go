@@ -1,10 +1,12 @@
 package jsonld
 
-// Context represents a JSON-LD @context.
+// Context represents a single namespace from a JSON-LD @context.
 //
 // Example:
 //
 //	context, err := jsonld.ContextOf(something)
+//
+// For multiple namespaces, see [Contexts].
 type Context struct {
 	NameSpace string
 	Prefix string
