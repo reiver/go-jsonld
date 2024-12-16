@@ -52,6 +52,29 @@ func TestDeepContextsOf(t *testing.T) {
 				},
 			},
 		},
+
+
+
+		{
+			Value: struct{
+				NameSpace jsonld.NameSpace `jsonld:"http://ns.example/id/42"`
+
+				Something any
+			}{
+				Something: struct{
+					NameSpace jsonld.NameSpace `jsonld:"http://example.com/ns"`
+				}{},
+			},
+			Expected: []jsonld.Context{
+				jsonld.Context{
+					NameSpace: `http://ns.example/id/42`,
+					Names: []string{"something"},
+				},
+				jsonld.Context{
+					NameSpace: `http://example.com/ns`,
+				},
+			},
+		},
 	}
 
 	for testNumber, test := range tests {
