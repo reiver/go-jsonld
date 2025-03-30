@@ -5,7 +5,7 @@ Package **jsonld** provides JSON-LD encoders and decoders, for the Go programmin
 And in particular, handles the way the Fediverse, ActivityPub, and ActivityStreams uses JSON-LD.
 
 And import thing to understand is — you use separate Go `struct`s to represent each JSON-LD namespace.
-Both for _marshaling_ and _unmarshaing_.
+Both for _marshaling_ and _unmarshaling_.
 
 ## Documention
 
