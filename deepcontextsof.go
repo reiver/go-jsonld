@@ -47,14 +47,24 @@ func DeepContextsOf(value any) ([]Context, error) {
 		for index:=0; index<limit; index++ {
 
 			var reflectedStructField reflect.StructField = reflectedType.Field(index)
-			if reflect.Struct != reflectedStructField.Type.Kind() {
-				continue
-			}
 			if !reflectedStructField.IsExported() {
 				continue
 			}
 
 			var fieldReflectedValue reflect.Value = reflectedStructValue.Field(index)
+
+			// For interface-typed fields, use the runtime value's kind.
+			var fieldKind reflect.Kind = reflectedStructField.Type.Kind()
+			if fieldKind == reflect.Interface {
+				if fieldReflectedValue.IsNil() {
+					continue
+				}
+				fieldReflectedValue = fieldReflectedValue.Elem()
+				fieldKind = fieldReflectedValue.Kind()
+			}
+			if reflect.Struct != fieldKind {
+				continue
+			}
 
 			ctxs, err := DeepContextsOf(fieldReflectedValue.Interface())
 			if nil != err {

@@ -68,7 +68,7 @@ func TestDeepContextsOf(t *testing.T) {
 			Expected: []jsonld.Context{
 				jsonld.Context{
 					NameSpace: `http://ns.example/id/42`,
-					Names: []string{"something"},
+					Names: []string{"Something"},
 				},
 				jsonld.Context{
 					NameSpace: `http://example.com/ns`,
