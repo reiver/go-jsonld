@@ -28,6 +28,17 @@ func SomeTypes(tt ...string) Types {
 	}
 }
 
+func (receiver Types) IsEmpty() bool {
+	if NoType() == receiver {
+		return true
+	}
+	if receiver.values.LenZero() {
+		return true
+	}
+
+	return false
+}
+
 func (receiver Types) MarshalJSON() ([]byte, error) {
 	strings := receiver.values.Strings()
 

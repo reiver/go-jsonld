@@ -31,6 +31,14 @@ func DirectionRTL() Direction {
 	}
 }
 
+func (receiver Direction) IsEmpty() bool {
+	if DirectionNull() == receiver {
+		return true
+	}
+
+	return false
+}
+
 func (receiver Direction) MarshalJSON() ([]byte, error) {
 	switch receiver {
 	case DirectionNull():
