@@ -8,12 +8,6 @@ import (
 	"github.com/reiver/go-nul"
 )
 
-var (
-	jsonNULL      = []byte{'n','u','l','l'}
-	jsonStringLTR = []byte{'"','l','t','r','"'}
-	jsonStringRTL = []byte{'"','r','t','l','"'}
-)
-
 // Direction is used as the value of the JSON-LD "@direction" construct.
 type Direction struct {
 	value nul.Nullable[string]
