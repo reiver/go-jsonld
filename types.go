@@ -52,6 +52,10 @@ func (receiver Types) MarshalJSON() ([]byte, error) {
 	}
 }
 
+func (receiver Types) Strings() []string {
+	return receiver.values.Strings()
+}
+
 func (receiver *Types) UnmarshalJSON(bytes []byte) error {
 	if nil == receiver {
 		return ErrNilReceiver
