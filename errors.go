@@ -5,6 +5,7 @@ import (
 )
 
 const (
+	ErrInvalidTypeValue     = erorr.Error("json-ld invalid type value")
 	ErrNilReceiver          = erorr.Error("nil receiver")
 	ErrJSONUnmarshalFailure = erorr.Error("json-unmarshal failure")
 )

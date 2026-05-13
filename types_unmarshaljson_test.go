@@ -61,6 +61,127 @@ func TestTypes_UnmarshalJSON(t *testing.T) {
 			Data: []byte(`["apple","BANANA","Cherry","dAtE"]`),
 			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry", "dAtE"),
 		},
+
+
+
+		{
+			Data: []byte(`{"@id":"apple"}`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`{"@id":"BANANA"}`),
+			Expected: jsonld.SomeType("BANANA"),
+		},
+		{
+			Data: []byte(`{"@id":"Cherry"}`),
+			Expected: jsonld.SomeType("Cherry"),
+		},
+		{
+			Data: []byte(`{"@id":"dAtE"}`),
+			Expected: jsonld.SomeType("dAtE"),
+		},
+
+
+
+		{
+			Data: []byte(`{"id":"apple"}`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`{"id":"BANANA"}`),
+			Expected: jsonld.SomeType("BANANA"),
+		},
+		{
+			Data: []byte(`{"id":"Cherry"}`),
+			Expected: jsonld.SomeType("Cherry"),
+		},
+		{
+			Data: []byte(`{"id":"dAtE"}`),
+			Expected: jsonld.SomeType("dAtE"),
+		},
+
+
+
+		{
+			Data: []byte(`{"@id":"apple","id":"BANANA"}`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`{"id":"apple","@id":"BANANA"}`),
+			Expected: jsonld.SomeType("BANANA"),
+		},
+		{
+			Data: []byte(`{"@id":"Cherry","id":"dAtE"}`),
+			Expected: jsonld.SomeType("Cherry"),
+		},
+		{
+			Data: []byte(`{"id":"Cherry","@id":"dAtE"}`),
+			Expected: jsonld.SomeType("dAtE"),
+		},
+		{
+			Data: []byte(`[{"@id":"apple","id":"BANANA"}]`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`[{"id":"apple","@id":"BANANA"}]`),
+			Expected: jsonld.SomeType("BANANA"),
+		},
+		{
+			Data: []byte(`[{"@id":"apple","id":"BANANA"},{"@id":"Cherry","id":"dAtE"}]`),
+			Expected: jsonld.SomeTypes("apple", "Cherry"),
+		},
+		{
+			Data: []byte(`[{"id":"apple","@id":"BANANA"},{"id":"Cherry","@id":"dAtE"}]`),
+			Expected: jsonld.SomeTypes("BANANA", "dAtE"),
+		},
+
+
+
+		{
+			Data: []byte(`[{"@id":"apple"}]`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},{"@id":"BANANA"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA"),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},{"@id":"BANANA"},{"@id":"Cherry"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry"),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},{"@id":"BANANA"},{"@id":"Cherry"},{"@id":"dAtE"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry", "dAtE"),
+		},
+
+
+
+		{
+			Data: []byte(`[{"id":"apple"}]`),
+			Expected: jsonld.SomeType("apple"),
+		},
+		{
+			Data: []byte(`[{"id":"apple"},{"id":"BANANA"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA"),
+		},
+		{
+			Data: []byte(`[{"id":"apple"},{"id":"BANANA"},{"id":"Cherry"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry"),
+		},
+		{
+			Data: []byte(`[{"id":"apple"},{"id":"BANANA"},{"id":"Cherry"},{"id":"dAtE"}]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry", "dAtE"),
+		},
+
+
+
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE"]`),
+			Expected: jsonld.SomeTypes("apple", "BANANA", "Cherry", "dAtE"),
+		},
+
+
+
 	}
 
 	for testNumber, test := range tests {
@@ -109,6 +230,69 @@ func TestTypes_UnmarshalJSON_fail(t *testing.T) {
 		},
 		{
 			Data: []byte(`{}`),
+		},
+		{
+			Data: []byte(`[{}]`),
+		},
+
+
+
+		{
+			Data: []byte(`{"ONCE":"apple","TWICE":"BANANA","THRICE":"Cherry","FOURCE":"dAtE"}`),
+		},
+		{
+			Data: []byte(`[{"ONCE":"apple","TWICE":"BANANA","THRICE":"Cherry","FOURCE":"dAtE"}]`),
+		},
+		{
+			Data: []byte(`[{"ONCE":"apple"},{"TWICE":"BANANA"},{"THRICE":"Cherry"},{"FOURCE":"dAtE"}]`),
+		},
+
+
+
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", null]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", false]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", true]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", -1]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", 0]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", 1]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", {}]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"},"BANANA",{"id":"Cherry"},"dAtE", []]`),
+		},
+
+
+
+		{
+			Data: []byte(`["apple", {}]`),
+		},
+		{
+			Data: []byte(`[{}, "apple"]`),
+		},
+		{
+			Data: []byte(`[{}, "apple", {}]`),
+		},
+		{
+			Data: []byte(`[{}, "apple", {}, "BANANA", {}]`),
+		},
+		{
+			Data: []byte(`[{"@id":"apple"}, {}, {"id":"BANANA"}, {}, "Cherry"]`),
+		},
+		{
+			Data: []byte(`[{}, {"@id":"apple"}, {}, {"id":"BANANA"}, {}, "Cherry", {}, "dAtE", {}]`),
 		},
 	}
 
