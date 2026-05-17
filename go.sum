@@ -4,6 +4,8 @@ codeberg.org/reiver/go-erorr v0.0.0-20260414214747-7b76f85a93ac h1:Rf1Y1tEmk+jU/
 codeberg.org/reiver/go-erorr v0.0.0-20260414214747-7b76f85a93ac/go.mod h1:yAWy5VHI6xaVFUcCEote+Zp4cgUNtYLhgwzpRXXv9ps=
 codeberg.org/reiver/go-field v0.0.0-20260414030601-d901062f0b09 h1:LzvEazstwY7uljtWGgubz2a/H4Vk65BR9Y63VLXE8M0=
 codeberg.org/reiver/go-field v0.0.0-20260414030601-d901062f0b09/go.mod h1:752EzuARz/8LnYzfPcxBFIIKstqok9fyTUmi5qnjn+Q=
+github.com/reiver/go-blanknode v0.0.0-20260223080216-e52d50c68f52 h1:Hgc3jh0UaGleNqO4eym0STmsn9ceWyYUrCR2FItEvfo=
+github.com/reiver/go-blanknode v0.0.0-20260223080216-e52d50c68f52/go.mod h1:zQZyBNcaDYlP/4K5m5DgPoPdQJaySCvZGSJoL0aTado=
 github.com/reiver/go-calltrace v0.0.0-20251216205616-3931a8c7b154 h1:3w3kacKCTHArAMZenoEO2qssZzJiQ9G8ZJgEvKerbuE=
 github.com/reiver/go-calltrace v0.0.0-20251216205616-3931a8c7b154/go.mod h1:b9j4dbN++ed+soAS/+wSCZ+OsZSm3CWiuzxps8nzkew=
 github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f h1:D1QSxKHm8U73XhjsW3SFLkT0zT5pKJi+1KGboMhY1Rk=
@@ -16,7 +18,13 @@ github.com/reiver/go-nul v0.0.0-20260309043606-3c1893100dc2 h1:lHJTg2gM0mkPmS/dE
 github.com/reiver/go-nul v0.0.0-20260309043606-3c1893100dc2/go.mod h1:MF52Ubf46GDzATZlcjh/rGpVfv700Jt7XX5W0WHle30=
 github.com/reiver/go-opt v0.0.0-20260410151028-cc34d487e508 h1:ETZ2+gKwMCIPbxjoYGqZQUurs/mKEF4Z3/K/ZN0dfOo=
 github.com/reiver/go-opt v0.0.0-20260410151028-cc34d487e508/go.mod h1:wHNwdPLR/veyiWpxj9Vvof0lnHeHNVdU5Vx+rjoY9+o=
+github.com/reiver/go-ord v0.0.0-20260222220705-d6aedb3eb0fc h1:xBBwZRmZhwWaAJL09EtMiU41rIwp6y87nKOmPzUtFmk=
+github.com/reiver/go-ord v0.0.0-20260222220705-d6aedb3eb0fc/go.mod h1:OvqfI6FHXeWM5n0x4z3WaA2qhI5j80KFzf8T1XkQqaI=
 github.com/reiver/go-pckstr v0.0.0-20260425220659-60660d07c451 h1:qbhaYK3YedTMtmGQeTIresf1IjD7RYsaNG4t8anqiiM=
 github.com/reiver/go-pckstr v0.0.0-20260425220659-60660d07c451/go.mod h1:Ntz1C3qY9mCVE6zQXJZH1iEWV/a4avdNUU74yGvR3jE=
 golang.org/x/exp v0.0.0-20251125195548-87e1e737ad39 h1:DHNhtq3sNNzrvduZZIiFyXWOL9IWaDPHqTnLJp+rCBY=
 golang.org/x/exp v0.0.0-20251125195548-87e1e737ad39/go.mod h1:46edojNIoXTNOhySWIWdix628clX9ODXwPsQuG6hsK0=
+golang.org/x/net v0.54.0 h1:2zJIZAxAHV/OHCDTCOHAYehQzLfSXuf/5SoL/Dv6w/w=
+golang.org/x/net v0.54.0/go.mod h1:Sj4oj8jK6XmHpBZU/zWHw3BV3abl4Kvi+Ut7cQcY+cQ=
+golang.org/x/text v0.37.0 h1:Cqjiwd9eSg8e0QAkyCaQTNHFIIzWtidPahFWR83rTrc=
+golang.org/x/text v0.37.0/go.mod h1:a5sjxXGs9hsn/AJVwuElvCAo9v8QYLzvavO5z2PiM38=
